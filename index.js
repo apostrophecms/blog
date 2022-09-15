@@ -45,17 +45,14 @@ module.exports = {
       },
       year: {
         label: 'aposBlog:filterYear',
-        inputType: 'select',
         def: null
       },
       month: {
         label: 'aposBlog:filterMonth',
-        inputType: 'select',
         def: null
       },
       day: {
         label: 'aposBlog:filterDay',
-        inputType: 'select',
         def: null
       }
     }
@@ -66,6 +63,7 @@ module.exports = {
       findForEditing(_super, req, criteria, builders) {
         const query = _super(req, criteria, builders);
         query.future(null);
+
         return query;
       },
       newInstance(_super) {
@@ -73,6 +71,7 @@ module.exports = {
         if (!instance.releaseDate) {
           instance.releaseDate = dayjs().format('YYYY-MM-DD');
         }
+
         return instance;
       }
     };

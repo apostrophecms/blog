@@ -4,7 +4,7 @@ module.exports = (self, query) => {
   return {
     builders: {
       future: {
-        def: false,
+        def: null,
         async finalize() {
           const future = query.get('future');
           if (future === null || query.get('year') || query.get('month')) {
