@@ -1,9 +1,0 @@
-{% extends data.outerLayout %}
-{% block title %}{{ data.piece.title }}{% endblock %}
-
-{% block main %}
-  <h1>{{ data.piece.title }}</h1>
-  <p>
-    {{ data.piece.releaseDate | date('MMMM D, YYYY') }}
-  </p>
-{% endblock %}
