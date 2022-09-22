@@ -1,7 +1,7 @@
 {
   "label": "Blog article",
   "pluralLabel": "Blog articles",
-  "releaseDate": "Publication Date",
+  "releaseDate": "Release Date",
   "futureArticles": "Future Articles",
   "future": "Future",
   "past": "Past",
@@ -12,5 +12,5 @@
   "filterYear": "Year",
   "filterMonth": "Month",
   "filterDay": "Day",
-  "publishedOn": "Published on"
+  "releasedOn": "Released on"
 }

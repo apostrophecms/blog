@@ -5,7 +5,7 @@ module.exports = {
   extend: '@apostrophecms/piece-type',
   bundle: {
     directory: 'modules',
-    modules: ['@apostrophecms/blog-page']
+    modules: [ '@apostrophecms/blog-page' ]
   },
   options: {
     label: 'aposBlog:label',
@@ -33,7 +33,7 @@ module.exports = {
     },
     group: {
       basics: {
-        fields: ['releaseDate']
+        fields: [ 'releaseDate' ]
       }
     }
   },
@@ -60,12 +60,6 @@ module.exports = {
   queries,
   extendMethods(self) {
     return {
-      findForEditing(_super, req, criteria, builders) {
-        const query = _super(req, criteria, builders);
-        query.future(null);
-
-        return query;
-      },
       newInstance(_super) {
         const instance = _super();
         if (!instance.releaseDate) {

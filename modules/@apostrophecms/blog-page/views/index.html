@@ -19,7 +19,7 @@
   {% for piece in data.pieces %}
     <div class="apos-blog-post-preview">
       <h6 class="apos-blog-post-date">
-        {{ __t('aposBlog:publishedOn') }} {{ piece.releaseDate | date('MMMM D, YYYY') }}
+        {{ __t('aposBlog:releasedOn') }} {{ piece.releaseDate | date('MMMM D, YYYY') }}
       </h6>
       <h4 class="apos-blog-post-title">
         <a href="{{ piece._url }}">{{ piece.title }}</a>

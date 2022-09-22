@@ -6,9 +6,6 @@
     <a aria-label="Apostrophe logo" href="https://v3.docs.apostrophecms.org">
       <img src="https://img.shields.io/badge/MADE%20FOR%20Apostrophe%203-000000.svg?style=for-the-badge&logo=Apostrophe&labelColor=6516dd">
     </a>
-    <a aria-label="Test status" href="https://circleci.com/gh/apostrophecms/blog/tree/main">
-      <img alt="" src="https://img.shields.io/circleci/build/github/apostrophecms/blog?labelColor=000000&logo=circleci&style=for-the-badge">
-    </a>
     <a aria-label="Join the community on Discord" href="http://chat.apostrophecms.org">
       <img alt="" src="https://img.shields.io/discord/517772094482677790?color=5865f2&label=Join%20the%20Discord&logo=discord&logoColor=fff&labelColor=000&style=for-the-badge&logoWidth=20">
     </a>
@@ -18,7 +15,7 @@
   </p>
 </div>
 
-This module bundle helps developers quickly add blog articles to Apostrophe 3 websites. It provides the blog piece type (`@apostrophecms/blog`) as well as a special page type (`@apostrophecms/blog-page`) for editors to create a blog.
+This module bundle helps developers quickly add blog articles to Apostrophe 3 websites. It provides the blog post piece type (`@apostrophecms/blog`) as well as a special page type (`@apostrophecms/blog-page`) for editors to create a blog.
 
 ## Installation
 
@@ -37,7 +34,7 @@ require('apostrophe')({
   shortName: 'my-project',
   modules: {
     // The main blog piece type module
-    '@apostrophecms/': {},
+    '@apostrophecms/blog': {},
     // The blog page module
     '@apostrophecms/blog-page': {}
   }
@@ -71,9 +68,9 @@ module.exports = {
 
 ### Filtering by year, month, and day
 
-The default field `releaseDate` sets the date of the blog article. By default, only past articles are displayed to the user. In the Apostrophe UI, all articles are shown to the editors and admin.
+The default field `releaseDate` sets the release date of the blog post. By default, only articles released in the past are displayed to the user. In the Apostrophe UI, all articles are shown to the editors and admin.
 
-The blog page module, `@apostrophecms/blog-page`, provides query filters to refine blog results by year, month, and day. These are primarily used for index page filters (see the `filters.html` file), but can also be used in REST API requests and server-side queries. blogs that span multiple consecutive days are included in results if the query is at least partially included in their date span.
+The blog page module, `@apostrophecms/blog-page`, provides query filters to refine blog results by year, month, and day. These are primarily used for index page filters (see the `filters.html` file), but can also be used in REST API requests and server-side queries.
 
 | Filter Name | Description          | Expected Format |
 | ----------- | -------------------- | --------------- |
@@ -83,24 +80,24 @@ The blog page module, `@apostrophecms/blog-page`, provides query filters to refi
 
 ### Multiple blog piece types
 
-Sometimes a website needs multiple, distinct types of blogs. If the blog types can be managed together, it might be easiest to [add a new field](https://v3.docs.apostrophecms.org/guide/content-schema.html#using-existing-field-groups) and [query builder](https://v3.docs.apostrophecms.org/reference/module-api/module-overview.html#queries-self-query) to customize blog views. But if the blog types should be managed completely separately, it may be better to create separate piece types for each.
+Sometimes a website needs multiple, distinct types of blog posts. If the blog posts types can be managed together, it might be easiest to [add a new field](https://v3.docs.apostrophecms.org/guide/content-schema.html#using-existing-field-groups) and [query builder](https://v3.docs.apostrophecms.org/reference/module-api/module-overview.html#queries-self-query) to customize blog views. But if the blog posts types should be managed completely separately, it may be better to create separate piece types for each.
 
-Just as we [extend `@apostrophecms/piece-type`](https://v3.docs.apostrophecms.org/guide/pieces.html#creating-a-piece-type) to create a new piece type, we can extend `@apostrophecms/blog` to create a new blog type. The blog type will need its own module directory and UI labels. It can simply inherit the original templates, fields, and other configuration or override them in the blog type's `index.js` file.
+Just as we [extend `@apostrophecms/piece-type`](https://v3.docs.apostrophecms.org/guide/pieces.html#creating-a-piece-type) to create a new piece type, we can extend `@apostrophecms/blog` to create a new blog post type. The blog post type will need its own module directory and UI labels. It can simply inherit the original fields, and other configuration or override them in the blog type's `index.js` file.
 
-A special blog type that has an blog URL field might look like this:
+A special blog post type that has a blog URL field might look like this:
 
 ```javascript
 // modules/special-blog/index.js
 module.exports = {
   extend: '@apostrophecms/blog',
   options: {
-    label: 'Special blog',
-    pluralLabel: 'Special blogs'
+    label: 'Special blog post',
+    pluralLabel: 'Special blog posts'
   },
   fields: {
     add: {
       blogUrl: {
-        label: 'blog URL',
+        label: 'blog post URL',
         type: 'url'
       }
     },
@@ -111,7 +108,7 @@ module.exports = {
 };
 ```
 
-To display custom blog types on a page, we would need to do the same for the blog page module. All custom modules would need to be instantiated in the `app.js` file like any other module.
+As always with piece-page types and piece types, you must have a module extending @apostrophecms/blog-page that corresponds to each module extending @apostrophecms/blog. Apostrophe will match them up based on the naming convention.
 
 ```javascript
 // modules/special-blog-page/index.js

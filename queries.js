@@ -5,7 +5,7 @@ module.exports = (self, query) => {
     builders: {
       future: {
         def: null,
-        async finalize() {
+        finalize() {
           const future = query.get('future');
           if (future === null || query.get('year') || query.get('month')) {
             return;
@@ -24,16 +24,16 @@ module.exports = (self, query) => {
         choices() {
           return [
             {
+              value: null,
+              label: 'aposBlog:both'
+            },
+            {
               value: true,
               label: 'aposBlog:future'
             },
             {
               value: false,
               label: 'aposBlog:past'
-            },
-            {
-              value: null,
-              label: 'aposBlog:both'
             }
           ];
         }
@@ -52,7 +52,13 @@ module.exports = (self, query) => {
           query.and({ releaseDate: { $regex: '^' + year } });
         },
         launder(value) {
-          return self.apos.launder.string(value);
+          const year = self.apos.launder.string(value);
+
+          if (!year.match(/^\d\d\d\d$/)) {
+            return '';
+          }
+
+          return year;
         },
         async choices() {
           const allDates = await query.toDistinct('releaseDate');
