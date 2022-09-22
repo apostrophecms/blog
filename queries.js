@@ -7,7 +7,7 @@ module.exports = (self, query) => {
         def: null,
         finalize() {
           const future = query.get('future');
-          if (future === null || query.get('year') || query.get('month')) {
+          if (future === null) {
             return;
           }
 
@@ -97,14 +97,14 @@ module.exports = (self, query) => {
 
           query.and({ releaseDate: { $regex: '^' + month } });
         },
-        launder(s) {
-          s = self.apos.launder.string(s);
+        launder(value) {
+          const month = self.apos.launder.string(value);
 
-          if (!s.match(/^\d\d\d\d-\d\d$/)) {
+          if (!month.match(/^\d\d\d\d-\d\d$/)) {
             return null;
           }
 
-          return s;
+          return month;
         },
         async choices() {
           const allDates = await query.toDistinct('releaseDate');
@@ -143,12 +143,14 @@ module.exports = (self, query) => {
 
           query.and({ releaseDate: day });
         },
-        launder(s) {
-          s = self.apos.launder.string(s);
-          if (!s.match(/^\d\d\d\d-\d\d-\d\d$/)) {
+        launder(value) {
+          const day = self.apos.launder.string(value);
+
+          if (!day.match(/^\d\d\d\d-\d\d-\d\d$/)) {
             return null;
           }
-          return s;
+
+          return day;
         },
         async choices() {
           const allDates = await query.toDistinct('releaseDate');
