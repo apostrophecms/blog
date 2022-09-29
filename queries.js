@@ -6,16 +6,20 @@ module.exports = (self, query) => {
       future: {
         def: null,
         finalize() {
-          const future = query.get('future');
+          let future = query.get('future');
+
+          if (!self.apos.permission.can(query.req, 'edit', self.name, 'draft')) {
+            future = false;
+          }
           if (future === null) {
             return;
           }
 
           const today = dayjs().format('YYYY-MM-DD');
           if (future) {
-            query.and({ releaseDate: { $gte: today } });
+            query.and({ publishedAt: { $gte: today } });
           } else {
-            query.and({ releaseDate: { $lte: today } });
+            query.and({ publishedAt: { $lte: today } });
           }
         },
         launder(value) {
@@ -49,7 +53,7 @@ module.exports = (self, query) => {
             return;
           }
 
-          query.and({ releaseDate: { $regex: '^' + year } });
+          query.and({ publishedAt: { $regex: '^' + year } });
         },
         launder(value) {
           const year = self.apos.launder.string(value);
@@ -61,7 +65,7 @@ module.exports = (self, query) => {
           return year;
         },
         async choices() {
-          const allDates = await query.toDistinct('releaseDate');
+          const allDates = await query.toDistinct('publishedAt');
           const years = [
             {
               value: null,
@@ -95,7 +99,7 @@ module.exports = (self, query) => {
             return;
           }
 
-          query.and({ releaseDate: { $regex: '^' + month } });
+          query.and({ publishedAt: { $regex: '^' + month } });
         },
         launder(value) {
           const month = self.apos.launder.string(value);
@@ -107,7 +111,7 @@ module.exports = (self, query) => {
           return month;
         },
         async choices() {
-          const allDates = await query.toDistinct('releaseDate');
+          const allDates = await query.toDistinct('publishedAt');
           const months = [
             {
               value: null,
@@ -141,7 +145,7 @@ module.exports = (self, query) => {
             return;
           }
 
-          query.and({ releaseDate: day });
+          query.and({ publishedAt: day });
         },
         launder(value) {
           const day = self.apos.launder.string(value);
@@ -153,7 +157,7 @@ module.exports = (self, query) => {
           return day;
         },
         async choices() {
-          const allDates = await query.toDistinct('releaseDate');
+          const allDates = await query.toDistinct('publishedAt');
           const days = [
             {
               value: null,

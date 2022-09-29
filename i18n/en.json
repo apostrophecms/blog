@@ -1,8 +1,8 @@
 {
-  "label": "Blog article",
-  "pluralLabel": "Blog articles",
-  "releaseDate": "Release Date",
-  "futureArticles": "Future Articles",
+  "label": "Blog post",
+  "pluralLabel": "Blog post",
+  "publishedAt": "Publication Date",
+  "futureArticles": "Future Posts",
   "future": "Future",
   "past": "Past",
   "both": "Both",
