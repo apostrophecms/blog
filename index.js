@@ -10,7 +10,7 @@ module.exports = {
   options: {
     label: 'aposBlog:label',
     pluralLabel: 'aposBlog:pluralLabel',
-    sort: { releaseDate: -1 },
+    sort: { publishedAt: -1 },
     i18n: {
       ns: 'aposBlog',
       browser: true
@@ -18,22 +18,22 @@ module.exports = {
   },
   columns: {
     add: {
-      releaseDate: {
-        label: 'aposBlog:releaseDate'
+      publishedAt: {
+        label: 'aposBlog:publishedAt'
       }
     }
   },
   fields: {
     add: {
-      releaseDate: {
-        label: 'aposBlog:releaseDate',
+      publishedAt: {
+        label: 'aposBlog:publishedAt',
         type: 'date',
         required: true
       }
     },
     group: {
       basics: {
-        fields: [ 'releaseDate' ]
+        fields: [ 'publishedAt' ]
       }
     }
   },
@@ -62,8 +62,8 @@ module.exports = {
     return {
       newInstance(_super) {
         const instance = _super();
-        if (!instance.releaseDate) {
-          instance.releaseDate = dayjs().format('YYYY-MM-DD');
+        if (!instance.publishedAt) {
+          instance.publishedAt = dayjs().format('YYYY-MM-DD');
         }
 
         return instance;
