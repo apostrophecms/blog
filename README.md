@@ -68,7 +68,9 @@ module.exports = {
 
 ### Filtering by year, month, and day
 
-The default field `publishedAt` sets the release date of the blog post. By default, only articles released in the past are displayed to the user. In the Apostrophe UI, all articles are shown to the editors and admin.
+The default field `publishedAt` ("Publication Date" in the UI) sets the publication date of the blog post. By default, only articles released in the past are displayed to the user. In the Apostrophe admin UI, all articles are shown to the editors and admin.
+
+> This doesn't mean that Apostrophe will automatically publish a draft update to an existing post on this date. To schedule the publication of new draft content, consider installing the optional [@apostrophecms/scheduled-publishing](https://github.com/apostrophecms/scheduled-publishing) module.
 
 The blog page module, `@apostrophecms/blog-page`, provides query filters to refine blog results by year, month, and day. These are primarily used for index page filters (see the `filters.html` file), but can also be used in REST API requests and server-side queries.
 

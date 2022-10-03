@@ -11,6 +11,7 @@ module.exports = (self, query) => {
           if (!self.apos.permission.can(query.req, 'edit', self.name, 'draft')) {
             future = false;
           }
+
           if (future === null) {
             return;
           }
