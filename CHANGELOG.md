@@ -1,5 +1,7 @@
 # Changelog
 
-## 1.0.0
+## [1.0.0] - 2022-10-03
 
-- Initial release with support for blog pieces and blog piece pages.
+### Added
+
+- Initial release for Apostrophe 3 with support for blog pieces and blog piece pages.
