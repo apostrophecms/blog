@@ -1,5 +1,11 @@
 # Changelog
 
+## [1.0.1] - 2022-11-16
+
+### Fixed
+
+- Documented the need to activate the bundle in `app.js` separately from activating the modules.
+
 ## [1.0.0] - 2022-10-03
 
 ### Added

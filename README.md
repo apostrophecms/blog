@@ -32,6 +32,8 @@ Configure the blog modules in the `app.js` file:
 ```javascript
 require('apostrophe')({
   shortName: 'my-project',
+  // Activate the bundle
+  bundles: [ '@apostrophecms/blog' ],
   modules: {
     // The main blog piece type module
     '@apostrophecms/blog': {},
