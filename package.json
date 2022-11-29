@@ -10,9 +10,9 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/apostrophecms/a3-blog.git"
+    "url": "git+https://github.com/apostrophecms/blog.git"
   },
-  "homepage": "https://github.com/apostrophecms/a3-blog#readme",
+  "homepage": "https://github.com/apostrophecms/blog#readme",
   "author": "Apostrophe Technologies",
   "license": "MIT",
   "dependencies": {
