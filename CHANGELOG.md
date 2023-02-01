@@ -1,5 +1,11 @@
 # Changelog
 
+## UNRELEASED
+
+### Fixed
+
+- The npm hoe page and readme links were corrected. Thanks to community member [zenflow](https://github.com/zenflow).
+  
 ## [1.0.1] - 2022-11-28
 
 ### Fixed
