@@ -24,7 +24,7 @@ module.exports = (self, query) => {
           }
         },
         launder(value) {
-          return self.apos.launder.booleanOrNull(value);
+          return self.apos.launder.booleanOrNull(value || null);
         },
         choices() {
           return [
