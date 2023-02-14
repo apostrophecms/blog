@@ -6,21 +6,25 @@ module.exports = (self, query) => {
       future: {
         def: null,
         finalize() {
-          const future = !self.apos.permission.can(query.req, 'edit', self.name, 'draft')
-            ? 'past'
-            : query.get('future');
+          let future = query.get('future');
 
-          if (!future) {
+          if (!self.apos.permission.can(query.req, 'edit', self.name, 'draft')) {
+            future = false;
+          }
+
+          if (future === null) {
             return;
           }
 
-          const operator = future === 'past' ? '$lte' : '$gte';
           const today = dayjs().format('YYYY-MM-DD');
-
-          query.and({ publishedAt: { [operator]: today } });
+          if (future) {
+            query.and({ publishedAt: { $gte: today } });
+          } else {
+            query.and({ publishedAt: { $lte: today } });
+          }
         },
         launder(value) {
-          return self.apos.launder.string(value);
+          return self.apos.launder.booleanOrNull(value);
         },
         choices() {
           return [
@@ -29,11 +33,11 @@ module.exports = (self, query) => {
               label: 'aposBlog:both'
             },
             {
-              value: 'future',
+              value: true,
               label: 'aposBlog:future'
             },
             {
-              value: 'past',
+              value: false,
               label: 'aposBlog:past'
             }
           ];

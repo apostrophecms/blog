@@ -9,10 +9,10 @@ module.exports = {
   extendMethods(self) {
     return {
       indexQuery(_super, req) {
-        return _super(req).future('past');
+        return _super(req).future(false);
       },
       showQuery(_super, req) {
-        return _super(req).future('past');
+        return _super(req).future(false);
       }
     };
   }
