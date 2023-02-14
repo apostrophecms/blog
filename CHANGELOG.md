@@ -4,7 +4,7 @@
 
 ### Fixed
 
-- Fixes `future` filter using choices as strings instead of booleans.
+- Fixes `future` filter when "any" choice is selected.
 
 ## 1.0.2 - 2023-03-01
 
