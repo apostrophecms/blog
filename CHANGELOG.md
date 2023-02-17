@@ -1,12 +1,12 @@
 # Changelog
 
-## UNRELEASED
+## 1.0.3 - 2023-02-17
 
 ### Fixed
 
 - Fixes `future` filter when "both" choice is selected.
 
-## 1.0.2 - 2023-03-01
+## 1.0.2 - 2023-02-01
 
 ### Fixed
 
