@@ -49,7 +49,6 @@ module.exports = (self, query) => {
       // Filter by year, in YYYY format.
       year: {
         def: null,
-        safeFor: 'public',
         finalize() {
           const year = query.get('year');
           if (!year) {
@@ -94,7 +93,6 @@ module.exports = (self, query) => {
       // Filter by month, in YYYY-MM format.
       month: {
         def: null,
-        safeFor: 'public',
         finalize() {
           const month = query.get('month');
 
@@ -140,7 +138,6 @@ module.exports = (self, query) => {
       // Filter by day, in YYYY-MM-DD format.
       day: {
         def: null,
-        safeFor: 'public',
         finalize() {
           const day = query.get('day');
 
