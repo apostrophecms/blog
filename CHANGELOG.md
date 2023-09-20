@@ -1,5 +1,11 @@
 # Changelog
 
+## UNRELEASED
+
+### Changes
+
+- Removes the outdated `safeFor` property from the custom queries.
+
 ## 1.0.3 - 2023-02-17
 
 ### Fixed
