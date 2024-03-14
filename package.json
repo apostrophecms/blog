@@ -1,7 +1,7 @@
 {
   "name": "@apostrophecms/blog",
   "version": "1.0.4",
-  "description": "Blog module for Apostrophe 3 websites",
+  "description": "Blog module for ApostropheCMS websites",
   "main": "index.js",
   "scripts": {
     "lint": "npm run eslint",
