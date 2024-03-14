@@ -3,7 +3,7 @@
 
   <h1>Apostrophe Blog</h1>
   <p>
-    <a aria-label="Apostrophe logo" href="https://v3.docs.apostrophecms.org">
+    <a aria-label="Apostrophe logo" href="https://docs.apostrophecms.org">
       <img src="https://img.shields.io/badge/MADE%20FOR%20ApostropheCMS-000000.svg?style=for-the-badge&logo=Apostrophe&labelColor=6516dd">
     </a>
     <a aria-label="Join the community on Discord" href="http://chat.apostrophecms.org">
@@ -15,7 +15,7 @@
   </p>
 </div>
 
-This module bundle helps developers quickly add blog articles to Apostrophe 3 websites. It provides the blog post piece type (`@apostrophecms/blog`) as well as a special page type (`@apostrophecms/blog-page`) for editors to create a blog.
+This module bundle helps developers quickly add blog articles to ApostropheCMS websites. It provides the blog post piece type (`@apostrophecms/blog`) as well as a special page type (`@apostrophecms/blog-page`) for editors to create a blog.
 
 ## Installation
 
@@ -84,9 +84,9 @@ The blog page module, `@apostrophecms/blog-page`, provides query filters to refi
 
 ### Multiple blog piece types
 
-Sometimes a website needs multiple, distinct types of blog posts. If the blog posts types can be managed together, it might be easiest to [add a new field](https://v3.docs.apostrophecms.org/guide/content-schema.html#using-existing-field-groups) and [query builder](https://v3.docs.apostrophecms.org/reference/module-api/module-overview.html#queries-self-query) to customize blog views. But if the blog posts types should be managed completely separately, it may be better to create separate piece types for each.
+Sometimes a website needs multiple, distinct types of blog posts. If the blog posts types can be managed together, it might be easiest to [add a new field](https://docs.apostrophecms.org/guide/content-schema.html#using-existing-field-groups) and [query builder](https://docs.apostrophecms.org/reference/module-api/module-overview.html#queries-self-query) to customize blog views. But if the blog posts types should be managed completely separately, it may be better to create separate piece types for each.
 
-Just as we [extend `@apostrophecms/piece-type`](https://v3.docs.apostrophecms.org/guide/pieces.html#creating-a-piece-type) to create a new piece type, we can extend `@apostrophecms/blog` to create a new blog post type. The blog post type will need its own module directory and UI labels. It can simply inherit the original fields, and other configuration or override them in the blog type's `index.js` file.
+Just as we [extend `@apostrophecms/piece-type`](https://docs.apostrophecms.org/guide/pieces.html#creating-a-piece-type) to create a new piece type, we can extend `@apostrophecms/blog` to create a new blog post type. The blog post type will need its own module directory and UI labels. It can simply inherit the original fields, and other configuration or override them in the blog type's `index.js` file.
 
 A special blog post type that has a blog URL field might look like this:
 
@@ -112,7 +112,7 @@ module.exports = {
 };
 ```
 
-As always with piece-page types and piece types, you must have a module extending @apostrophecms/blog-page that corresponds to each module extending @apostrophecms/blog. Apostrophe will match them up based on the naming convention.
+As always with piece-page types and piece types, you must have a module extending `@apostrophecms/blog-page` that corresponds to each module extending `@apostrophecms/blog`. Apostrophe will match them up based on the naming convention.
 
 ```javascript
 // modules/special-blog-page/index.js
