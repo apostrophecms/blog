@@ -1,5 +1,11 @@
 # Changelog
 
+## UNRELEASED
+
+### Changes
+
+- Updates the documentation. No code changes.
+
 ## 1.0.4 2023-09-27
 
 ### Changes
