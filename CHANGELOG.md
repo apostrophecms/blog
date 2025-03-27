@@ -6,6 +6,10 @@
 
 - Updates the documentation. No code changes.
 
+### Fixed
+
+* Fix the result sorting and pagination issues due to unreliable sorting values.
+
 ## 1.0.4 2023-09-27
 
 ### Changes
