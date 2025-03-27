@@ -10,7 +10,10 @@ module.exports = {
   options: {
     label: 'aposBlog:label',
     pluralLabel: 'aposBlog:pluralLabel',
-    sort: { publishedAt: -1 },
+    sort: {
+      publishedAt: -1,
+      createdAt: -1
+    },
     i18n: {
       ns: 'aposBlog',
       browser: true
