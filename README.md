@@ -17,6 +17,10 @@
 
 This module bundle helps developers quickly add blog articles to ApostropheCMS websites. It provides the blog post piece type (`@apostrophecms/blog`) as well as a special page type (`@apostrophecms/blog-page`) for editors to create a blog.
 
+> ⚠️ The examples below use **ESM (ECMAScript Modules)** syntax (`import`, `export`).  
+> ApostropheCMS still supports **CommonJS (CJS)**, but we recommend using ESM for all new projects.  
+> **Important:** Don’t mix ESM and CJS in the same project. Choose one and stick to it.
+
 ## Installation
 
 To install the module, use the command line to run this command in an Apostrophe project's root directory:
@@ -49,7 +53,7 @@ To enable the blog page type for editor to select, add it to the `@apostrophecms
 
 ```javascript
 // modules/@apostrophecms/page/index.js
-module.exports = {
+export default {
   options: {
     types: [
       {
@@ -92,7 +96,7 @@ A special blog post type that has a blog URL field might look like this:
 
 ```javascript
 // modules/special-blog/index.js
-module.exports = {
+export default {
   extend: '@apostrophecms/blog',
   options: {
     label: 'Special blog post',
@@ -116,7 +120,7 @@ As always with piece-page types and piece types, you must have a module extendin
 
 ```javascript
 // modules/special-blog-page/index.js
-module.exports = {
+export default {
   extend: '@apostrophecms/blog-page'
 };
 ```
