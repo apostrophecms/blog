@@ -1,7 +1,3 @@
-
-> ⚠️ The examples below use **ESM (ECMAScript Modules)** syntax (`import`, `export`).  
-> ApostropheCMS still supports **CommonJS (CJS)**, but we recommend using ESM for all new projects.  
-> **Important:** Don’t mix ESM and CJS in the same project. Choose one and stick to it.
 <div align="center">
   <img src="https://raw.githubusercontent.com/apostrophecms/apostrophe/main/logo.svg" alt="ApostropheCMS logo" width="80" height="80">
 
@@ -20,6 +16,10 @@
 </div>
 
 This module bundle helps developers quickly add blog articles to ApostropheCMS websites. It provides the blog post piece type (`@apostrophecms/blog`) as well as a special page type (`@apostrophecms/blog-page`) for editors to create a blog.
+
+> ⚠️ The examples below use **ESM (ECMAScript Modules)** syntax (`import`, `export`).  
+> ApostropheCMS still supports **CommonJS (CJS)**, but we recommend using ESM for all new projects.  
+> **Important:** Don’t mix ESM and CJS in the same project. Choose one and stick to it.
 
 ## Installation
 
