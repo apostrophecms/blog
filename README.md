@@ -1,3 +1,7 @@
+
+> ⚠️ The examples below use **ESM (ECMAScript Modules)** syntax (`import`, `export`).  
+> ApostropheCMS still supports **CommonJS (CJS)**, but we recommend using ESM for all new projects.  
+> **Important:** Don’t mix ESM and CJS in the same project. Choose one and stick to it.
 <div align="center">
   <img src="https://raw.githubusercontent.com/apostrophecms/apostrophe/main/logo.svg" alt="ApostropheCMS logo" width="80" height="80">
 
@@ -49,7 +53,7 @@ To enable the blog page type for editor to select, add it to the `@apostrophecms
 
 ```javascript
 // modules/@apostrophecms/page/index.js
-module.exports = {
+export default {
   options: {
     types: [
       {
@@ -92,7 +96,7 @@ A special blog post type that has a blog URL field might look like this:
 
 ```javascript
 // modules/special-blog/index.js
-module.exports = {
+export default {
   extend: '@apostrophecms/blog',
   options: {
     label: 'Special blog post',
@@ -116,7 +120,7 @@ As always with piece-page types and piece types, you must have a module extendin
 
 ```javascript
 // modules/special-blog-page/index.js
-module.exports = {
+export default {
   extend: '@apostrophecms/blog-page'
 };
 ```
