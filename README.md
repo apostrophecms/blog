@@ -15,29 +15,37 @@
   </p>
 </div>
 
-This module bundle helps developers quickly add blog articles to ApostropheCMS websites. It provides the blog post piece type (`@apostrophecms/blog`) as well as a special page type (`@apostrophecms/blog-page`) for editors to create a blog.
+**Add blog functionality to ApostropheCMS sites** with article management, date-based filtering, and multiple blog support. Provides both the blog piece type and page templates to get started quickly.
+
+## Features
+
+- **📝 Blog Article Management** - Complete CRUD interface for blog posts with publication dates
+- **🗓️ Date-based Filtering** - Built-in year/month/day query filters for archives and navigation
+- **🎨 Fully Customizable** — Override templates, add fields, and style it to match your brand
+- **🔗 Multiple Blog Types** - Extend to create different blog categories (news, updates, etc.)
+- **⏰ Publication Control** - Articles only appear when published date is in the past
 
 ## Installation
 
 To install the module, use the command line to run this command in an Apostrophe project's root directory:
 
-```
+```bash
 npm install @apostrophecms/blog
 ```
 
 ## Usage
 
-Configure the blog modules in the `app.js` file:
+Configure the blog modules in your `app.js` file:
 
 ```javascript
-require('apostrophe')({
+import apostrophe from 'apostrophe';
+
+export default apostrophe({
+  root: import.meta,
   shortName: 'my-project',
-  // Activate the bundle
   bundles: [ '@apostrophecms/blog' ],
   modules: {
-    // The main blog piece type module
     '@apostrophecms/blog': {},
-    // The blog page module
     '@apostrophecms/blog-page': {}
   }
 });
@@ -45,80 +53,144 @@ require('apostrophe')({
 
 ### Enable the page type
 
-To enable the blog page type for editor to select, add it to the `@apostrophecms/page` configuration:
+Add the blog page type to your page configuration:
 
 ```javascript
 // modules/@apostrophecms/page/index.js
-module.exports = {
+export default {
   options: {
     types: [
       {
         name: '@apostrophecms/home-page',
         label: 'Home'
       },
-      // Adding the blog page type
       {
         name: '@apostrophecms/blog-page',
-        label: 'Blog Page'
+        label: 'Blog'
       }
     ]
   }
 };
 ```
 
-**Note:** The index page template (`index.html`), filters template partial (`filters.html`), and show page template (`show.html`) are primarily meant as a starting point for a project. They demonstrate much of the available template data, but developers will almost always want to override them to implement proper styles and layout.
+## Customizing Templates
 
-### Filtering by year, month, and day
+The included templates (`index.html`, `show.html`, `filters.html`) are starting points that demonstrate the available data. Override them in your project to implement your own styling and layout:
 
-The default field `publishedAt` ("Publication Date" in the UI) sets the publication date of the blog post. By default, only articles released in the past are displayed to the user. In the Apostrophe admin UI, all articles are shown to the editors and admin.
+```
+modules/
+├── @apostrophecms/
+│   └── blog-page/
+│       └── views/
+│           ├── index.html      # Blog listing page
+│           ├── show.html       # Individual blog post
+│           └── filters.html    # Date filtering controls
+```
 
-> This doesn't mean that Apostrophe will automatically publish a draft update to an existing post on this date. To schedule the publication of new draft content, consider installing the optional [@apostrophecms/scheduled-publishing](https://github.com/apostrophecms/scheduled-publishing) module.
+## Date-based Filtering
 
-The blog page module, `@apostrophecms/blog-page`, provides query filters to refine blog results by year, month, and day. These are primarily used for index page filters (see the `filters.html` file), but can also be used in REST API requests and server-side queries.
+The blog includes built-in query filters for creating archive navigation and date-based URLs:
 
-| Filter Name | Description          | Expected Format |
-| ----------- | -------------------- | --------------- |
-| `year`      | Filter by blog year  | `YYYY`          |
-| `month`     | Filter by blog month | `YYYY-MM`       |
-| `day`       | Filter by blog day   | `YYYY-MM-DD`    |
+| Filter | Format | Example URL |
+|--------|--------|-------------|
+| `year` | `YYYY` | `/blog?year=2024` |
+| `month` | `YYYY-MM` | `/blog?month=2024-03` |
+| `day` | `YYYY-MM-DD` | `/blog?day=2024-03-15` |
 
-### Multiple blog piece types
+### Publication Control
+
+Blog posts use the `publishedAt` field to control visibility. Only articles with publication dates in the past appear on the public site. Editors see all articles in the admin interface.
+
+> **Note:** This doesn't automatically publish draft changes on the publication date. For scheduled publishing of draft content, consider the [@apostrophecms/scheduled-publishing](https://apostrophecms.com/extensions/scheduled-publishing) module.
+
+## Multiple Blog Types
 
 Sometimes a website needs multiple, distinct types of blog posts. If the blog posts types can be managed together, it might be easiest to [add a new field](https://docs.apostrophecms.org/guide/content-schema.html#using-existing-field-groups) and [query builder](https://docs.apostrophecms.org/reference/module-api/module-overview.html#queries-self-query) to customize blog views. But if the blog posts types should be managed completely separately, it may be better to create separate piece types for each.
 
-Just as we [extend `@apostrophecms/piece-type`](https://docs.apostrophecms.org/guide/pieces.html#creating-a-piece-type) to create a new piece type, we can extend `@apostrophecms/blog` to create a new blog post type. The blog post type will need its own module directory and UI labels. It can simply inherit the original fields, and other configuration or override them in the blog type's `index.js` file.
-
-A special blog post type that has a blog URL field might look like this:
+### Creating a Custom Blog Type
 
 ```javascript
-// modules/special-blog/index.js
-module.exports = {
+// modules/news-blog/index.js - for news articles
+export default {
   extend: '@apostrophecms/blog',
   options: {
-    label: 'Special blog post',
-    pluralLabel: 'Special blog posts'
+    label: 'News Article',
+    pluralLabel: 'News Articles'
   },
   fields: {
     add: {
-      blogUrl: {
-        label: 'blog post URL',
-        type: 'url'
+      priority: {
+        type: 'select',
+        choices: [
+          { label: 'Standard', value: 'standard' },
+          { label: 'Breaking', value: 'breaking' },
+          { label: 'Featured', value: 'featured' }
+        ]
+      },
+      source: {
+        type: 'string',
+        label: 'News Source',
+        help: 'Original source of this news item'
       }
     },
     group: {
-      basics: { fields: ['blogUrl'] }
+      basics: { fields: ['priority', 'source'] }
     }
   }
 };
 ```
 
-As always with piece-page types and piece types, you must have a module extending `@apostrophecms/blog-page` that corresponds to each module extending `@apostrophecms/blog`. Apostrophe will match them up based on the naming convention.
+Every blog piece type needs a corresponding page type that extends `@apostrophecms/blog-page`:
 
 ```javascript
-// modules/special-blog-page/index.js
-module.exports = {
+// modules/news-blog-page/index.js - page type for news articles
+export default {
   extend: '@apostrophecms/blog-page'
 };
 ```
 
-Do this as many times as you need custom blog types. Adding filtering and new fields to the base blog module is usually enough for most use cases, but organizations with more complex blog needs will find this strategy helpful.
+### Custom Templates for Blog Types
+
+Each blog type can have its own templates. Create them in the corresponding page module:
+
+```
+modules/
+├── news-blog-page/
+│   └── views/
+│       ├── index.html      # News listing page
+│       ├── show.html       # Individual news article
+│       └── filters.html    # Custom filters for news
+└── @apostrophecms/
+    └── blog-page/
+        └── views/
+            ├── index.html  # Default blog listing
+            └── show.html   # Default blog post
+```
+
+This allows you to:
+- Style news articles differently from regular blog posts
+- Add custom filtering options specific to news content
+- Display different fields or layouts for each blog type
+- Create distinct navigation and user experiences
+
+This approach works well when blog types have different:
+- **Content structures** - News articles vs. technical tutorials vs. company announcements
+- **Editorial workflows** - Different teams managing different content types
+- **Display requirements** - Unique styling, filtering, or organization needs
+- **URL patterns** - `/blog/`, `/news/`, `/updates/` with distinct navigation
+
+## Field Reference
+
+The blog piece type includes these fields by default:
+
+- **Title** (`title`) - Article headline
+- **Slug** (`slug`) - URL-friendly identifier  
+- **Publication Date** (`publishedAt`) - Controls public visibility
+- **Content** (`body`) - Rich text content area
+- **Meta Description** (`metaDescription`) - SEO description
+- **Tags** (`tags`) - Taxonomy for categorization
+
+---
+*Built with ❤️ by the ApostropheCMS team.*
+---
+**Found this useful?** [Give us a star on GitHub](https://github.com/apostrophecms/blog) ⭐
