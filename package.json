@@ -1,6 +1,6 @@
 {
   "name": "@apostrophecms/blog",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "description": "Blog module for ApostropheCMS websites",
   "main": "index.js",
   "scripts": {
