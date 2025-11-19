@@ -1,5 +1,9 @@
 # Changelog
 
+## UNRELEASED
+
+- Adds a default SEO structured data schema type
+
 ## 1.0.6 (2025-09-03)
 
 * README improvemeents

@@ -3,7 +3,8 @@ module.exports = {
 
   options: {
     label: 'aposBlog:page',
-    piecesFilters: [ { name: 'year' }, { name: 'month' }, { name: 'day' } ]
+    piecesFilters: [ { name: 'year' }, { name: 'month' }, { name: 'day' } ],
+    seoSchemaType: 'CollectionPage'
   },
 
   extendMethods(self) {
